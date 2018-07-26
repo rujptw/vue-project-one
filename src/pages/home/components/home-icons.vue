@@ -51,6 +51,7 @@
 
 <style lang="stylus" scoped>
     @import '~styles/varibles.styl'
+    @import '~styles/mixins.styl'
     .icons >>> .swiper-container-horizontal
         // width:100%
         height:0
@@ -73,9 +74,7 @@
             line-height :0.44rem
             text-align:center
             color:$textColor
-            overflow:hidden
-            white-space:nowrap
-            text-overflow:ellipsis
+            ellipsis()//stylus的函数
         .icon-img
             position :absolute
             top:0
