@@ -1,9 +1,9 @@
 <template>
     <div class="swiper">
-        <swiper :options="swiperOption">
+        <swiper :options="swiperOption" v-if="showSwiper">
             <!-- slides -->
-            <swiper-slide v-for="item in imgUrls" :key="item.id">
-                <img class="swiper-img" :src="item.url"/>
+            <swiper-slide v-for="item in list" :key="item.id">
+                <img class="swiper-img" :src="item.imgUrl"/>
             </swiper-slide>
             <!-- Optional controls -->
             <div class="swiper-pagination"  slot="pagination"></div>
@@ -14,25 +14,21 @@
 <script>
 export default {
   name: "homeSwiper",
+  props: {
+    list: Array
+  },
   data() {
     return {
       swiperOption: {
         pagination: ".swiper-pagination", //增加小圆点
         loop: true
-      },
-      imgUrls: [
-        {
-          id: "001",
-          url:
-            "https://source.qunarzz.com/site/images/wap/home/recommend/iphoneplus/dujia_shuqi_banner_20180710.jpg"
-        },
-        {
-          id: "002",
-          url:
-            "https://source.qunarzz.com/site/images/wap/home/recommend/iphoneplus/anquan_20180716.png"
-        }
-      ]
+      }
     };
+  },
+  computed: {
+    showSwiper() {
+      return this.list.length;
+    }
   }
 };
 </script>

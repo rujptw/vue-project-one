@@ -3,8 +3,8 @@
         <div class="title">
         热销推荐
         </div>
-        <ul>
-            <li class="item border-bottom" v-for="(item,index) in viewRecommend" :key="index">
+        <ul v-if="showRecommend">
+            <li class="item border-bottom" v-for="(item,index) in list" :key="index">
                 <div class="item-img-wrapper">
                     <img class="item-img" :src="item.imgUrl" >
                 </div>
@@ -21,27 +21,16 @@
 <script>
 export default {
   name: "homeRecommand",
+  props: {
+    list: Array
+  },
   data() {
-    return {
-      viewRecommend: [
-        {
-          imgUrl:"http://img1.qunarzz.com/sight/p0/1607/7c/7cda8b6782dabd80b4.img.jpg_200x200_2039e660.jpg",
-          title: "上海迪士尼乐园",
-          desc: "带你回到童年,大人小孩都爱玩"
-        },
-        {
-          imgUrl:"http://img1.qunarzz.com/sight/p0/1511/96/9608b598f546b2fe90.water.jpg_200x200_7defc426.jpg",
-          title: "二灵山温泉",
-          desc: "泡温泉,保持健康"
-        },
-        {
-          imgUrl:"http://img1.qunarzz.com/sight/p0/1603/37/37b8877cd2c8055e90.water.jpg_200x200_faf644e9.jpg",
-          title: "四明山森林公园",
-          desc: "接近自然呼吸新鲜空气"
-        },
-
-      ]
-    };
+    return {};
+  },
+  computed: {
+    showRecommend() {
+      return this.list.length;
+    }
   }
 };
 </script>

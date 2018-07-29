@@ -1,6 +1,6 @@
 <template>
     <div class="icons">
-        <swiper :options="swiperOption" >
+        <swiper :options="swiperOption" v-if="showIcons">
         <swiper-slide v-for="(page,index) in pages" :key="index">
         <div class="icon" v-for="item in page" :key="item.id">
             <div class="icon-img">
@@ -16,72 +16,22 @@
 <script>
 export default {
   name: "homeIcons",
+  props: {
+    list: Array
+  },
   data() {
     return {
-      swiperOption: {},
-      imgurls: [
-        {
-          id: "01",
-          imgUrl:
-            "http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png",
-          desc: "景点门票"
-        },
-        {
-          id: "02",
-          imgUrl:
-            "http://img1.qunarzz.com/piao/fusion/1803/8c/47630407f70e8302.png",
-          desc: "影视基地"
-        },
-        {
-          id: "03",
-          imgUrl:
-            "http://img1.qunarzz.com/piao/fusion/1803/96/c70f1e85ae4a4f02.png",
-          desc: "自然风光"
-        },
-        {
-          id: "04",
-          imgUrl:
-            "http://img1.qunarzz.com/piao/fusion/1803/75/eca3ce656c886502.png",
-          desc: "漂流"
-        },
-        {
-          id: "05",
-          imgUrl:
-            "http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png",
-          desc: "景点门票"
-        },
-        {
-          id: "06",
-          imgUrl:
-            "http://img1.qunarzz.com/piao/fusion/1803/8c/47630407f70e8302.png",
-          desc: "影视基地"
-        },
-        {
-          id: "07",
-          imgUrl:
-            "http://img1.qunarzz.com/piao/fusion/1803/96/c70f1e85ae4a4f02.png",
-          desc: "自然风光"
-        },
-        {
-          id: "08",
-          imgUrl:
-            "http://img1.qunarzz.com/piao/fusion/1803/75/eca3ce656c886502.png",
-          desc: "漂流"
-        },
-        {
-          id: "09",
-          imgUrl:
-            "http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png",
-          desc: "一日游"
-        }
-      ]
+      swiperOption: {
+        autoplay: false
+      }
     };
   },
   computed: {
     //做分页效果
     pages() {
+      console.log("list", this.list);
       const pages = [];
-      this.imgurls.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8);
         if (!pages[page]) {
           pages[page] = [];
@@ -89,6 +39,9 @@ export default {
         pages[page].push(item);
       });
       return pages;
+    },
+    showIcons() {
+      return this.list.length;
     }
   }
 };
