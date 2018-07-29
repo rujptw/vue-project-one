@@ -7,10 +7,12 @@
                 <span class="iconfont">&#xe632;</span>
                 输入城市/地点
             </div>
-            <div class="header-right">
-                {{city}}
-                <span class="iconfont arrow-icon">&#xe62d;</span>
-            </div>
+            <router-link to="/city">
+                <div class="header-right">
+                    {{city}}
+                    <span class="iconfont arrow-icon">&#xe62d;</span>
+                </div>
+             </router-link>
         </div>
 </template>
 
@@ -19,9 +21,6 @@ export default {
   name: "homeHeader",
   props: {
     city: String
-  },
-  mounted() {
-    console.log("city", this.$props);
   }
 };
 </script>
@@ -32,7 +31,7 @@ export default {
 
 .header {
     display: flex;
-    line-height: 0.86rem; // 让子dom居中
+    line-height: $headerHeight; // 让子dom居中
     background: $bgColor; // 变量
     color: #fff;
 
@@ -59,6 +58,7 @@ export default {
     }
 
     .header-right {
+        color: #fff;
         width: 1.24rem;
         float: right;
         text-align: center;
@@ -66,7 +66,6 @@ export default {
 
         .arrow-icon {
             font-size: 0.24rem;
-            margin-left: -0.05rem;
         }
     }
 }

@@ -29,7 +29,6 @@ export default {
   computed: {
     //做分页效果
     pages() {
-      console.log("list", this.list);
       const pages = [];
       this.list.forEach((item, index) => {
         const page = Math.floor(index / 8);
