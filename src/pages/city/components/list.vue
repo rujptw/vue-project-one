@@ -1,5 +1,6 @@
 <template>
-    <div class="list">
+    <div class="list" ref="wrapper">
+     <div class="list-wrapper">
         <div class="area">
             <div class="title border-topbottom">当前城市</div>
             <div class="button-list">
@@ -53,13 +54,26 @@
                 <div class="item border-bottom">阿塞拜疆</div>
                 <div class="item border-bottom">阿塞拜疆</div>
             </div>
+            <div class="title border-topbottom">C</div>
+            <div class="item-list">
+                <div class="item border-bottom">阿塞拜疆</div>
+                <div class="item border-bottom">阿塞拜疆</div>
+                <div class="item border-bottom">阿塞拜疆</div>
+                <div class="item border-bottom">阿塞拜疆</div>
+                <div class="item border-bottom">阿塞拜疆</div>
+            </div>
         </div>
+     </div>
     </div>    
 </template>
 
 <script>
+import BScroll from "better-scroll";
 export default {
-  name: "cityList"
+  name: "cityList",
+  mounted() {
+    this.scroll = new BScroll(this.$refs.wrapper); //使用better-scroll组件
+  }
 };
 </script>
 
@@ -83,14 +97,15 @@ export default {
 }
 
 .list {
-    position :absolute
-    overflow:hidden
-    top:1.58rem
-    left:0
-    right:0
-    bottom:0
+    position: absolute;
+    overflow: hidden;
+    top: 1.58rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
     .title {
-        line-height: 0.44rem;
+        line-height: 0.54rem;
         padding-left: 0.2rem;
         background: #ccc;
         font-size: 0.26rem;
