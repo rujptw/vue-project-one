@@ -5,28 +5,29 @@
 </template>
 
 <script>
-    export default {
-        name:"citySearch"
-    }
+export default {
+  name: "citySearch"
+};
 </script>
 
 <style lang="stylus" scoped>
-    @import '~styles/varibles.styl';
-    .search{
-        height:0.72rem;
-        line-height:0.72rem;
-        background :$bgColor;
-        padding:0 0.1rem;
-        .search-input{
-            box-sizing :border-box;
-            width:100%;
-            padding:0 0.1rem;
-            height:0.62rem;
-            line-height:0.62rem;
-            text-align:center;
-            border-radius :0.06rem;
-            color:#666;
-        }
-    }
+@import '~styles/varibles.styl';
 
+.search {
+    height: 0.72rem;
+    line-height: 0.72rem;
+    background: $bgColor;
+    padding: 0 0.1rem;
+
+    .search-input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0 0.1rem;
+        height: 0.62rem;
+        line-height: 0.62rem;
+        text-align: center;
+        border-radius: 0.06rem;
+        color: #666;
+    }
+}
 </style>
