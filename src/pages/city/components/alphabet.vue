@@ -7,8 +7,8 @@
 <script>
 export default {
   name: "cityAlphabet",
-  props:{
-      cities:Object
+  props: {
+    cities: Object
   }
 };
 </script>

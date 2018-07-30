@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 import cityHeader from "./components/header";
 import citySearch from "./components/search";
 import cityList from "./components/list";
@@ -22,35 +22,36 @@ export default {
     cityList,
     cityAlphabet
   },
-  data(){
-    return{
-      cities:{},
-      hotCities:[]
+  data() {
+    return {
+      cities: {},
+      hotCities: []
+    };
+  },
+  methods: {
+    getCityInfo() {
+      axios
+        .get("/api/city.json")
+        .then(res => {
+          let data;
+          if (res.data.data) {
+            data = res.data.data;
+          } else {
+            data = {};
+          }
+          if (res.data.ret && data) {
+            this.cities = data.cities;
+            this.hotCities = data.hotCities;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
-  methods:{
-    getCityInfo(){
-      axios.get("/api/city.json")
-      .then(res=>{
-        let data;
-        if(res.data.data){
-          data = res.data.data;
-        }else{
-          data = {};
-        }
-        if(res.data.ret&&data){
-          this.cities = data.cities;
-          this.hotCities = data.hotCities;
-        }
-      })
-      .catch(err=>{
-        console.log(err)
-      })  
-    }
-  },
-  mounted(){
-    this.getCityInfo()
-  },
+  mounted() {
+    this.getCityInfo();
+  }
 };
 </script>
 

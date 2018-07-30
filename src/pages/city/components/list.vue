@@ -31,9 +31,9 @@
 import BScroll from "better-scroll";
 export default {
   name: "cityList",
-  props:{
-      hotCities:Array,
-      cities:Object
+  props: {
+    hotCities: Array,
+    cities: Object
   },
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper); //使用better-scroll组件
