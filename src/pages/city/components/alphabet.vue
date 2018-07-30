@@ -55,7 +55,7 @@ export default {
         if (this.timer) {
           clearTimeout(this.timer);
         } else {
-          setTimeout(() => {
+          this.timer = setTimeout(() => {
             let touchY = e.touches[0].clientY - 79;
             let index = Math.floor((touchY - this.startY) / 20);
             if (index >= 0 && index < this.letters.length) {
