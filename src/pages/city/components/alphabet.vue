@@ -21,8 +21,14 @@ export default {
   },
   data() {
     return {
-      touchStatus: false
+      touchStatus: false,
+      startY: 0,
+      timer: ""
     };
+  },
+  /**数据变化调用此生命周期函数，用于性能优化 */
+  updated() {
+    this.startY = this.$refs["A"][0].offsetTop;
   },
   computed: {
     letters() {
@@ -43,13 +49,19 @@ export default {
     handleTouchEnd() {
       this.touchStatus = false;
     },
+    /**函数节流,减少move的触发频率，以提高性能 */
     handleTouchMove(e) {
       if (this.touchStatus) {
-        let startY = this.$refs["A"][0].offsetTop;
-        let touchY = e.touches[0].clientY - 79;
-        let index = Math.floor((touchY - startY) / 20);
-        if (index >= 0 && index < this.letters.length) {
-          this.$emit("changeArea", this.letters[index]);
+        if (this.timer) {
+          clearTimeout(this.timer);
+        } else {
+          setTimeout(() => {
+            let touchY = e.touches[0].clientY - 79;
+            let index = Math.floor((touchY - this.startY) / 20);
+            if (index >= 0 && index < this.letters.length) {
+              this.$emit("changeArea", this.letters[index]);
+            }
+          }, 20);
         }
       }
     }
