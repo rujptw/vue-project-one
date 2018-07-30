@@ -2,12 +2,13 @@
 <div class="city">
     <city-header></city-header>
     <city-search></city-search>
-    <city-list></city-list>
-    <city-alphabet></city-alphabet>
+    <city-list :hot-cities="hotCities" :cities="cities"></city-list>
+    <city-alphabet :cities="cities"></city-alphabet>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 import cityHeader from "./components/header";
 import citySearch from "./components/search";
 import cityList from "./components/list";
@@ -20,7 +21,36 @@ export default {
     citySearch,
     cityList,
     cityAlphabet
-  }
+  },
+  data(){
+    return{
+      cities:{},
+      hotCities:[]
+    }
+  },
+  methods:{
+    getCityInfo(){
+      axios.get("/api/city.json")
+      .then(res=>{
+        let data;
+        if(res.data.data){
+          data = res.data.data;
+        }else{
+          data = {};
+        }
+        if(res.data.ret&&data){
+          this.cities = data.cities;
+          this.hotCities = data.hotCities;
+        }
+      })
+      .catch(err=>{
+        console.log(err)
+      })  
+    }
+  },
+  mounted(){
+    this.getCityInfo()
+  },
 };
 </script>
 
