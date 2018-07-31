@@ -51,10 +51,11 @@ export default {
     },
     /**函数节流,减少move的触发频率，以提高性能 */
     handleTouchMove(e) {
+      console.log(1111111111)
       if (this.touchStatus) {
         if (this.timer) {
           clearTimeout(this.timer);
-        } else {
+        }
           this.timer = setTimeout(() => {
             let touchY = e.touches[0].clientY - 79;
             let index = Math.floor((touchY - this.startY) / 20);
@@ -62,7 +63,6 @@ export default {
               this.$emit("changeArea", this.letters[index]);
             }
           }, 20);
-        }
       }
     }
   }
