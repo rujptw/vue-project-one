@@ -5,7 +5,11 @@
         </div>
         <div class="content" ref="search" v-show="keyword">
             <ul>
-                <li  class="content-item border-bottom" v-for="(item,index) in list" :key="index">{{item.name}}</li>
+                <li  class="content-item border-bottom" 
+                v-for="(item,index) in list" 
+                :key="index"
+                @click="switchCity(item.name)"
+                >{{item.name}}</li>
                 <li  class="content-item border-bottom" v-show="noData">没有找到匹配的数据</li>
             </ul>
         </div>
@@ -26,38 +30,44 @@ export default {
   props: {
     cities: Object
   },
-  mounted(){
-    this.scroll = new BScroll(this.$refs.search)
+  methods: {
+    switchCity(city) {
+      this.$store.commit("changeCity", city);
+      this.$router.push("/");
+    }
   },
-  computed:{
-    noData(){
-      return !this.list.length
+  mounted() {
+    this.scroll = new BScroll(this.$refs.search);
+  },
+  computed: {
+    noData() {
+      return !this.list.length;
     }
   },
   watch: {
     keyword() {
       // 函数节流
-      if(!this.keyword){
+      if (!this.keyword) {
         this.list = [];
         return this.list;
       }
       if (this.timer) {
         clearTimeout(this.timer);
       }
-        this.timer = setTimeout(() => {
-          let result = [];
-          for (let i in this.cities) {
-            this.cities[i].forEach(value => {
-              if (
-                value.spell.indexOf(this.keyword) > -1 ||
-                value.name.indexOf(this.keyword) > -1
-              ) {
-                result.push(value);
-              }
-            });
-          }
-          this.list = result;
-        }, 200);
+      this.timer = setTimeout(() => {
+        let result = [];
+        for (let i in this.cities) {
+          this.cities[i].forEach(value => {
+            if (
+              value.spell.indexOf(this.keyword) > -1 ||
+              value.name.indexOf(this.keyword) > -1
+            ) {
+              result.push(value);
+            }
+          });
+        }
+        this.list = result;
+      }, 200);
     }
   }
 };

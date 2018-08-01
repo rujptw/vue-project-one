@@ -1,6 +1,6 @@
 <template>
     <div>
-        <home-header :city="city"></home-header>
+        <home-header ></home-header>
         <home-swiper :list="swiperList"></home-swiper>
         <home-icons  :list="iconList"></home-icons>
         <home-recommend :list="recommendList"></home-recommend>
@@ -19,7 +19,6 @@ export default {
   name: "Home",
   data() {
     return {
-      city: "",
       swiperList: [],
       iconList: [],
       recommendList: [],
@@ -41,8 +40,7 @@ export default {
         .then(res => {
           //使用箭头函数绑定当前作用域
           if (res.data.ret && res.data.data) {
-            (this.city = res.data.data.city),
-              (this.swiperList = res.data.data.swiperList);
+            this.swiperList = res.data.data.swiperList;
             this.iconList = res.data.data.iconList;
             this.recommendList = res.data.data.recommendList;
             this.weekendList = res.data.data.weekendList;
