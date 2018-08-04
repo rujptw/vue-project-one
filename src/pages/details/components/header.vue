@@ -23,7 +23,6 @@ export default {
   },
   methods: {
     checkScroll() {
-      console.log("scroll");
       let top = document.documentElement.scrollTop;
       if (top >= 51) {
         let opacity = top / 140;
@@ -66,6 +65,7 @@ export default {
 }
 
 .header-fixed {
+  z-index: 99;
   position: fixed;
   top: 0;
   left: 0;
