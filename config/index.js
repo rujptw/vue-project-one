@@ -12,10 +12,11 @@ module.exports = {
     assetsPublicPath: '/',
     //proxyTable能够重写请求路径，然后上线时就不用做更改了
     proxyTable: {
-      '/api':{
-        target:"http://localhost:8080",
-        pathRewrite:{
-          '^/api':'/static/mock'
+      //访问api路径，请求target的路径（target为后端数据请求地址）
+      '/api': {
+        target: "http://localhost:8080",
+        pathRewrite: {
+          '^/api': '/static/mock' //请求api路径映射为mock路径
         }
       }
     },
@@ -28,7 +29,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */
@@ -51,6 +52,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
+    //改变assetsPublicPath属性值可以不把上线的代码放在根路径例如'/project1'
     assetsPublicPath: '/',
 
     /**
