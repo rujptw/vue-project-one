@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="details">
-            <banner></banner>
+            <banner :sightname="sightname" :bannerimg="bannerimg" :gallaryimgs="gallaryimgs"></banner>
             <details-header></details-header>
             <div class="content">
-                <details-list :list="list"></details-list>
+                <details-list :list="categorylist"></details-list>
             </div>
         </div>
     </div>
@@ -14,10 +14,15 @@
 import Banner from "./components/banner.vue";
 import detailsHeader from "./components/header.vue";
 import detailsList from "./components/list.vue";
+import axios from "axios";
 export default {
   name: "Details",
   data() {
     return {
+      sightname: "",
+      bannerimg: "",
+      categorylist: [],
+      gallaryimgs: [],
       list: [
         {
           title: "成人票",
@@ -54,13 +59,35 @@ export default {
     Banner,
     detailsHeader,
     detailsList
+  },
+  methods: {
+    getDetailInfo() {
+      axios
+        .get("/api/detail.json?" + this.$route.params.id)
+        .then(res => {
+          console.log(res);
+          if (res.data.ret && res.data.data) {
+            let data = res.data.data;
+            this.sightname = data.sightName;
+            this.bannerimg = data.bannerImg;
+            this.categorylist = data.categoryList;
+            this.gallaryimgs = data.gallaryImgs;
+            console.log("this.gallaryimgs", this.gallaryimgs);
+            console.log("data", data);
+          }
+        })
+        .catch(err => {});
+    }
+  },
+  mounted() {
+    this.getDetailInfo();
   }
 };
 </script>
 
 <style lang="stylus">
 .content {
-    height: 50rem;
+  height: 50rem;
 }
 </style>
 

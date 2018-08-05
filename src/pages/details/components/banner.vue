@@ -1,17 +1,16 @@
 <template>
     <div>
         <div class="banner" @click="handleGallery">
-            <img class="banner-img" src="https://img1.qunarzz.com/p/tts2/1703/5c/d01c530e3e8ab002.jpg_r_640x420x90_08fb7f5b.jpg"/>
+            <img class="banner-img" :src="bannerimg"/>
             <div class="banner-desc">
-                <div class="banner-title">产品编号 434335789</div>
+                <div class="banner-title">{{sightname}}</div>
                  <div class="banner-num">
                       <span class="iconfont icon-back banner-icon">&#xe695;</span>
-                       5
-                 </div>
-                
+                       {{gallaryimgs.length}}
+                 </div> 
             </div>
         </div>
-        <gallery :imgs="imgs" v-show="showGallery" @close="listenClose"></gallery>
+        <gallery :imgs="gallaryimgs" v-show="showGallery" @close="listenClose"></gallery>
     </div>
 </template>
 
@@ -19,19 +18,22 @@
 import Gallery from "common/gallery/gallery";
 export default {
   name: "Banner",
-  data(){
-      return {
-          showGallery:false,
-          imgs:["https://ugc.qunarzz.com/9/2e34469b.JPEG_r_1500x_e756b70d.jpeg",
-          "https://img1.qunarzz.com/p/tts6/1507/54/5a5e44b688c80c.jpg_r_640x420x90_22b49626.jpg"]
-      }
+  props: {
+    sightname: String,
+    bannerimg: String,
+    gallaryimgs: Array
+  },
+  data() {
+    return {
+      showGallery: false
+    };
   },
   methods: {
-    handleGallery(){
-        this.showGallery = true;
+    handleGallery() {
+      this.showGallery = true;
     },
-    listenClose(){
-        this.showGallery = false;
+    listenClose() {
+      this.showGallery = false;
     }
   },
   components: {

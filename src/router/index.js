@@ -16,11 +16,17 @@ export default new Router({
       path: '/city',
       name: "city",
       component: City
-    },{
+    }, {
       path: '/details/:id',
       name: "details",
       component: Details
     }
-
-  ]
+  ],
+  //确保每个页面显示的时候都保持在最顶端
+  scrollBehavior(to, from, savedPosition) {
+    return {
+      x: 0,
+      y: 0
+    }
+  }
 })
